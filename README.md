@@ -7,7 +7,6 @@ A Model Context Protocol (MCP) server that provides seamless integration with Az
 - **Project Management**: List and retrieve information about Azure DevOps projects
 - **Repository Operations**: Browse repositories, list files and folders, and retrieve file contents
 - **Wiki Integration**: Access and retrieve Azure DevOps wiki pages and content
-- **FastMCP Framework**: Built on the FastMCP framework for high-performance MCP tool serving
 - **SSE Transport**: Supports Server-Sent Events for real-time communication
 
 ## Available MCP Tools
@@ -66,7 +65,7 @@ Accesses Azure DevOps wiki pages and their content.
 ## Prerequisites
 
 - Python 3.13 or higher
-- Azure DevOps Personal Access Token (PAT)
+- Azure DevOps Personal Access Token (PAT) with reference to https://github.com/microsoft/azure-devops-python-api
 - Access to an Azure DevOps organization
 
 ## Installation
@@ -74,17 +73,14 @@ Accesses Azure DevOps wiki pages and their content.
 1. Clone this repository:
 ```bash
 git clone <repository-url>
-cd azdomcp
+cd azdo-mcp
 ```
 
 2. Install dependencies using uv:
 ```bash
+pip install uv
+uv lock
 uv sync
-```
-
-Or using pip:
-```bash
-pip install -r requirements.txt
 ```
 
 ## Configuration
@@ -118,105 +114,22 @@ python main.py
 
 The server will start on port 8080 using Server-Sent Events (SSE) transport.
 
-### Using with MCP Clients
-
-This server can be used with any MCP-compatible client. The server exposes the Azure DevOps tools through the MCP protocol, allowing AI assistants to:
-
-- Browse your Azure DevOps projects
-- Explore repository structures
-- Read file contents
-- Access wiki documentation
-- Retrieve project metadata
-
-### Example MCP Client Configuration
-
-For VS Code with the MCP extension, add this to your MCP configuration:
-
-```json
-{
-  "mcpServers": {
-    "azure-devops": {
-      "command": "python",
-      "args": ["path/to/azdomcp/main.py"],
-      "env": {
-        "AZURE_DEVOPS_PAT": "your_pat_here",
-        "AZURE_DEVOPS_ORG_URL": "https://dev.azure.com/your-org"
-      }
-    }
-  }
-}
-```
-
-## Architecture
-
-- **FastMCP Framework**: High-performance MCP server implementation
-- **Azure DevOps SDK**: Official Python SDK for Azure DevOps integration
-- **SSE Transport**: Real-time communication using Server-Sent Events
-- **Error Handling**: Comprehensive error handling and JSON response formatting
-- **Modular Design**: Clean separation of concerns with individual tool functions
-
-## Dependencies
-
-- `fastmcp`: FastMCP framework for MCP server implementation
-- `azure-devops`: Official Azure DevOps Python SDK
-- `msrest`: Microsoft REST client library
-- `httpx`: HTTP client for async operations
-- `fastapi`: Modern web framework for APIs
-- `python-dotenv`: Environment variable management
-
-## Error Handling
-
-The server includes robust error handling for common scenarios:
-- Invalid authentication credentials
-- Missing required parameters
-- Network connectivity issues
-- Resource not found errors
-- Binary file detection and handling
-
-All errors are returned as JSON responses with descriptive error messages.
-
 ## Development
 
 ### Project Structure
 
 ```
-azdomcp/
+azdo-mcp/
 ├── main.py              # Main MCP server implementation
-├── school_list.py       # Additional MCP tools (school-related)
 ├── pyproject.toml       # Project configuration
 ├── .env                 # Environment variables (create this)
-├── README.md           # This file
-└── .vscode/
-    └── mcp.json        # MCP client configuration
+├── README.md            # This file
 ```
 
-### Running in Development Mode
-
-For development with auto-reload:
-
-```bash
-uvicorn main:mcp --reload --port 8080
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## License
-
-[Add your license information here]
-
-## Support
-
-For issues and questions:
-- Create an issue in the repository
-- Check Azure DevOps SDK documentation
-- Review FastMCP framework documentation
 
 ---
 
-**Note**: This server provides read-only access to Azure DevOps resources. Ensure your PAT has the minimum required permissions for security best practices.
+**Note**: This server provides read-only access to Azure DevOps resources. Ensure you have review the necessary permissions and scopes for your Personal Access Token (PAT) to access the required resources.
+
+Please also refer to the [Azure DevOps Python API documentation](https://github.com/microsoft/azure-devops-python-api) for more details on available operations and configurations.
+
