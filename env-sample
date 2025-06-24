@@ -1,0 +1,2 @@
+AZURE_DEVOPS_PAT=<your_personal_access_token_here>
+AZURE_DEVOPS_ORG=https://dev.azure.com/your_organization_name

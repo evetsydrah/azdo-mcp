@@ -1,0 +1,19 @@
+[project]
+name = "azdo-server-sse"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "azure-devops<=7.1.0",
+    "msrest>=0.7.1",
+    "asyncio>=3.4.3",
+    "fastapi>=0.115.12",
+    "fastapi-mcp>=0.3.3",
+    "fastmcp>=2.3.4",
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.9.0",
+]
+
+[tool.uv.workspace]
+members = ["stdio"]
